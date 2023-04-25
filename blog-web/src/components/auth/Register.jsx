@@ -8,19 +8,20 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSignup = async () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      updateProfile(auth.currentUser, { displayName: name });
+      await updateProfile(auth.currentUser, { displayName: name });
       navigate("/");
     } catch (error) {
-      toast(error.code, { type: "error" });
+      toast.error(error.message);
     }
   };
+
   return (
-    <div className="border p-3 bg-light " style={{ marginTop: 70 }}>
+    <div className="border p-3 bg-light" style={{ marginTop: 70 }}>
       <h1>Register</h1>
       <div className="form-group">
         <label>Name</label>
@@ -28,9 +29,8 @@ export default function Register() {
           type="text"
           className="form-control"
           placeholder="Enter your name"
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="form-group">
@@ -39,24 +39,20 @@ export default function Register() {
           type="email"
           className="form-control"
           placeholder="Enter your email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-
       <div className="form-group">
         <label>Password</label>
         <input
           type="password"
           className="form-control"
-          placeholder="Password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <br />
       <button className="btn btn-primary" onClick={handleSignup}>
         Register
       </button>
