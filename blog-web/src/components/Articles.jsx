@@ -21,6 +21,7 @@ export default function Articles() {
       console.log(articles);
     });
   }, []);
+
   return (
     <div>
       {articles.length === 0 ? (
