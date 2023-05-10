@@ -7,7 +7,7 @@ import { signOut } from "firebase/auth";
 export default function Navbar() {
   const [user] = useAuthState(auth);
   return (
-    <div className="fixed-top border" style={{ backgroundColor: "whitesmoke" }}>
+    <div className="fixed-top border" style={{ backgroundColor: "" }}>
       <nav className="navbar">
         <div>
           <img
