@@ -23,8 +23,8 @@ export default function Comment({ id }) {
     if (e.key === "Enter") {
       updateDoc(commentRef, {
         comments: arrayUnion({
-          user: currentlyLoggedinUser.uid,
-          userName: currentlyLoggedinUser.displayName,
+          user: currentlyLoggedinUser?.uid,
+          userName: currentlyLoggedinUser?.displayName,
           comment: comment,
           createdAt: new Date(),
           commentId: uuidv4(),
@@ -60,7 +60,9 @@ export default function Comment({ id }) {
                 <div className="col-11">
                   <span
                     className={`badge ${
-                      user === currentlyLoggedinUser.uid
+                      user &&
+                      currentlyLoggedinUser &&
+                      user === currentlyLoggedinUser?.uid
                         ? "bg-success"
                         : "bg-primary"
                     }`}
@@ -70,7 +72,7 @@ export default function Comment({ id }) {
                   {comment}
                 </div>
                 <div className="col-1">
-                  {user === currentlyLoggedinUser.uid && (
+                  {user === currentlyLoggedinUser?.uid && (
                     <i
                       className="fa fa-times"
                       style={{ cursor: "pointer" }}
