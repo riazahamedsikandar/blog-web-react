@@ -11,9 +11,9 @@ export default function Navbar() {
       <nav className="navbar">
         <div>
           <img
-            src="logo192.png"
-            width={30}
-            height={30}
+            src="safa.png"
+            width={50}
+            height={50}
             alt="logo"
             className="ms-5"
           />
@@ -24,12 +24,22 @@ export default function Navbar() {
         <div>
           {user && (
             <>
-              <span className="pe-4">
+              <span className="pe-4" style={{ fontSize: "1.5rem" }}>
                 Signed is as {user.displayName || user.email}
               </span>
-              <button className="btn btn-primary btn-sm me-3"
-              onClick={()=>{signOut(auth)}}
-              >Logout</button>
+              <button
+                className="btn btn-primary btn-sm me-3"
+                onClick={() => {
+                  signOut(auth);
+                }}
+                style={{
+                  backgroundImage:
+                    "linear-gradient(to right top, #051937, #00507c, #008e98, #00c97d, #bef93a)",
+                  fontSize: "1rem"
+                }}
+              >
+                Logout
+              </button>
             </>
           )}
         </div>
