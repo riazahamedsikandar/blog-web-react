@@ -10,12 +10,14 @@ export default function Comment({ id }) {
   const [comments, setComments] = useState([]);
   const [currentlyLoggedinUser] = useAuthState(auth);
   const commentRef = doc(db, "Articles", id);
+
   useEffect(() => {
     const docRef = doc(db, "Articles", id);
-    onSnapshot(docRef, (snapshot) => {
+    const unsubscribe = onSnapshot(docRef, (snapshot) => {
       setComments(snapshot.data().comments);
     });
-  }, []);
+    return unsubscribe;
+  }, [id]);
 
   const handleChangeComment = (e) => {
     if (e.key === "Enter") {
@@ -37,21 +39,22 @@ export default function Comment({ id }) {
   const handleDeleteComment = (comment) => {
     console.log(comment);
     updateDoc(commentRef, {
-        comments:arrayRemove(comment),
+      comments: arrayRemove(comment),
     })
-    .then((e) => {
+      .then((e) => {
         console.log(e);
-    })
-    .catch((error) => {
+      })
+      .catch((error) => {
         console.log(error);
-    })
+      });
   };
+
   return (
     <div>
       Comment
       <div className="container">
         {comments !== null &&
-          comments.map(({ commentId, user, comment, userName , createdAt}) => (
+          comments.map(({ commentId, user, comment, userName, createdAt }) => (
             <div key={commentId}>
               <div className="border p-2 mt-2 row">
                 <div className="col-11">
@@ -71,7 +74,15 @@ export default function Comment({ id }) {
                     <i
                       className="fa fa-times"
                       style={{ cursor: "pointer" }}
-                      onClick={() => handleDeleteComment({ commentId, user, comment, userName , createdAt})}
+                      onClick={() =>
+                        handleDeleteComment({
+                          commentId,
+                          user,
+                          comment,
+                          userName,
+                          createdAt,
+                        })
+                      }
                     ></i>
                   )}
                 </div>

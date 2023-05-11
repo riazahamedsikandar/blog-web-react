@@ -31,7 +31,9 @@ export default function Article() {
           <div className="col-9 mt-3">
             <h2>{article.title}</h2>
             <h5>Author: {article.createdBy}</h5>
-            <div> Posted on: {article.createdAt.toDate().toDateString()}</div>
+            {article.createdAt && (
+              <div> Posted on: {article.createdAt.toDate().toDateString()}</div>
+            )}
             <hr />
             <h4>{article.description}</h4>
 
