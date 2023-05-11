@@ -143,3 +143,4 @@ export default function AddArticle() {
     </div>
   );
 }
+
