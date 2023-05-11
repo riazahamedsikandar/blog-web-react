@@ -7,7 +7,10 @@ import { signOut } from "firebase/auth";
 export default function Navbar() {
   const [user] = useAuthState(auth);
   return (
-    <div className="fixed-top border" style={{ backgroundColor: "whitesmoke" }}>
+    <div className="fixed-top border" style={{ 
+        backgroundImage: "linear-gradient(to right top, #373639, #34343c, #2e3440, #243442, #153444)",
+        color: "white"
+      }}>
       <nav className="navbar">
         <div>
           <img
@@ -18,7 +21,7 @@ export default function Navbar() {
             className="ms-5"
           />
         </div>
-        <Link className="nav-link" to="/">
+        <Link className="nav-link" to="/" style={{ fontSize: "1.5rem"}}>
           Home{" "}
         </Link>
         <div>
